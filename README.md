@@ -5,7 +5,7 @@
 B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technology, Bengaluru**, with a **9.28 CGPA**. I focus on **Generative AI and AI agents**, and I like to turn what I learn into practical, shipped projects.
 
 <p align="center">
-  <img src="assets/about.svg?v=a1c586b" width="100%" alt="Two patents filed (AI-powered autonomous height detection system; multilingual transliteration system). Agent-based projects: MedSys AI, GitShow, Wayfarer. End-to-end builds: data pipelines, APIs, dashboards and deployed apps.">
+  <img src="assets/about.svg?v=5ed4de8" width="100%" alt="Two patents filed (AI-powered autonomous height detection system; multilingual transliteration system). Agent-based projects: MedSys AI, GitShow, Wayfarer. Generative AI focus: RAG, LoRA fine-tuning and LLM-powered agents.">
 </p>
 
 ## Featured projects

@@ -15,7 +15,7 @@ const lines = (arr, x, y, size, fill, lh, cls = 'b') => arr.map((l, i) => `<text
   const W = 838, H = 232, g = 16, cw = (W - 2 * g) / 3;
   const icon1 = `<g transform="translate(22 22)"><rect x="2" y="6" width="30" height="38" rx="5" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="2"/><rect x="12" y="2" width="30" height="38" rx="5" fill="${T.s1}" stroke="${T.ac}" stroke-width="2"/><path class="ln" d="M20 14h14M20 22h14M20 30h8" stroke="${T.ac}" stroke-width="2" stroke-linecap="round" fill="none"/></g>`;
   const icon2 = `<g transform="translate(22 22)"><circle cx="24" cy="24" r="19" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="2" stroke-dasharray="3 6"/><circle class="pn pl" cx="24" cy="24" r="7" fill="${T.ac}"/><g class="sp"><circle cx="24" cy="5" r="4.5" fill="${T.vi}"/></g></g>`;
-  const icon3 = `<g transform="translate(22 22)"><path class="mr" d="M2 24h44" stroke="#fff" stroke-opacity=".2" stroke-width="2" fill="none"/><rect x="0" y="14" width="12" height="20" rx="4" fill="${T.s1}" stroke="${T.ac}" stroke-width="2"/><rect x="18" y="14" width="12" height="20" rx="4" fill="${T.s1}" stroke="${T.ac}" stroke-width="2"/><rect x="36" y="14" width="12" height="20" rx="4" fill="${T.s1}" stroke="${T.vi}" stroke-width="2"/><circle class="tr" cx="6" cy="24" r="3" fill="${T.ac}"/></g>`;
+  const icon3 = `<g transform="translate(22 22)"><g stroke="${T.ac}" stroke-opacity=".6" stroke-width="1.8" fill="none"><path d="M6 12L24 24M6 36L24 24M42 12L24 24M42 36L24 24" stroke-linecap="round"/></g><circle class="pn pl" cx="24" cy="24" r="8" fill="${T.ac}"/><circle class="pn pl" style="animation-delay:-.7s" cx="6" cy="12" r="4.5" fill="${T.vi}"/><circle class="pn pl" style="animation-delay:-1.4s" cx="6" cy="36" r="4.5" fill="${T.vi}"/><circle class="pn pl" style="animation-delay:-2.1s" cx="42" cy="12" r="4.5" fill="${T.vi}"/><circle class="pn pl" style="animation-delay:-2.8s" cx="42" cy="36" r="4.5" fill="${T.vi}"/></g>`;
   const tags = ['MedSys AI', 'GitShow', 'Wayfarer'];
   let tx = 0, ty = 0, tagSvg = '';
   tags.forEach((t) => { const k = tag(0, 0, t); if (tx + k.w > cw - 44) { tx = 0; ty += 34; } tagSvg += tag(tx, ty, t).svg; tx += k.w + 8; });
@@ -24,15 +24,14 @@ const lines = (arr, x, y, size, fill, lh, cls = 'b') => arr.map((l, i) => `<text
 <text class="m" x="22" y="140" font-size="11" fill="${T.ac}">01</text>${lines(['AI-powered autonomous height', 'detection system'], 48, 141, 13.5, T.mu, 18)}
 <text class="m" x="22" y="190" font-size="11" fill="${T.vi}">02</text>${lines(['Multilingual transliteration system'], 48, 191, 13.5, T.mu, 18)}`, icon1)
     + card(1, `<text class="d" x="22" y="106" font-size="21" font-weight="700" fill="${T.tx}">Agent-based projects</text><g transform="translate(22 128)">${tagSvg}</g>`, icon2)
-    + card(2, `<text class="d" x="22" y="106" font-size="21" font-weight="700" fill="${T.tx}">End-to-end builds</text>${lines(['Data pipelines, APIs, dashboards', 'and deployed apps.'], 22, 140, 13.5, T.mu, 19)}`, icon3);
+    + card(2, `<text class="d" x="22" y="106" font-size="21" font-weight="700" fill="${T.tx}">Generative AI focus</text>${lines(['RAG, LoRA fine-tuning and', 'LLM-powered agents.'], 22, 140, 13.5, T.mu, 19)}`, icon3);
   out('about.svg', svg({
     w: W, h: H, fonts: ['display-700', 'body-400', 'mono-500'],
     css: motion(`.ln{stroke-dasharray:60;animation:ln 4s ease-in-out infinite}@keyframes ln{0%{stroke-dashoffset:60}45%,100%{stroke-dashoffset:0}}
 .pl{animation:pl 3s ease-in-out infinite}@keyframes pl{50%{transform:scale(1.22)}}
 .sp{transform-origin:24px 24px;animation:sp 8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
-.mr{stroke-dasharray:5 7;animation:mr 2s linear infinite}@keyframes mr{to{stroke-dashoffset:-48}}
-.tr{animation:tr 2.4s ease-in-out infinite}@keyframes tr{0%{transform:translateX(0)}100%{transform:translateX(36px)}}`),
-    title: 'About', desc: 'Two patents filed (AI-powered autonomous height detection system; multilingual transliteration system). Agent-based projects: MedSys AI, GitShow, Wayfarer. End-to-end builds: data pipelines, APIs, dashboards and deployed apps.', body
+.mr{animation:mr 2s linear infinite}@keyframes mr{to{stroke-dashoffset:-45}}`),
+    title: 'About', desc: 'Two patents filed (AI-powered autonomous height detection system; multilingual transliteration system). Agent-based projects: MedSys AI, GitShow, Wayfarer. Generative AI focus: RAG, LoRA fine-tuning and LLM-powered agents.', body
   }));
 }
 

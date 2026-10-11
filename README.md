@@ -30,12 +30,6 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
   </tr>
 </table>
 
-## Activity
-
-<p align="center">
-  <a href="https://github.com/Param031010"><img src="assets/activity-game.svg?v=19afd5d" width="100%" alt="Contribution Invaders: my GitHub contributions over the last year as a small arcade game. Each active day is an alien block that a ship shoots as it sweeps across the weeks."></a>
-</p>
-
 ## Connect
 
 <p>

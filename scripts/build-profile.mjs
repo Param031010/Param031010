@@ -1,7 +1,7 @@
 // Regenerates assets/hero.svg with live numbers and refreshes ?v= cache-busters in README.md.
 // Node 20+, no dependencies. Env: GITHUB_TOKEN (or GH_PAT for private contributions). Optional: PROFILE_USER.
 import { writeFileSync } from 'node:fs';
-import { heroSvg, gameSvg, bumpReadmeVersions } from './svg-lib.mjs';
+import { heroSvg, bumpReadmeVersions } from './svg-lib.mjs';
 
 const user = process.env.PROFILE_USER || 'Param031010';
 const token = process.env.GH_PAT || process.env.GITHUB_TOKEN;
@@ -37,5 +37,4 @@ const nums = token ? await viaGraphQL().catch((e) => { console.warn(e.message, '
 console.log({ ...nums, days: nums.days.length });
 const { days, ...stats } = nums;
 writeFileSync('assets/hero.svg', heroSvg({ ...stats, patents: 2, cgpa: '9.28' }));
-writeFileSync('assets/activity-game.svg', gameSvg(days, stats.contributions));
 bumpReadmeVersions();

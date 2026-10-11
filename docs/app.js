@@ -14,7 +14,7 @@
   const RING2 = ['Java', 'FastAPI', 'Pandas', 'Scikit-Learn', 'MongoDB', 'Pinecone', 'JavaScript', 'Vercel'];
   const GROUPS = [
     ['Programming languages', ['C', 'Java', 'Python']],
-    ['Generative AI & LLMs', ['Prompt Engineering', 'RAG', 'Fine-tuning LLMs (LoRA based)', 'Working with LLMs']],
+    ['Generative AI & LLMs', ['Prompt Engineering', 'Retrieval-Augmented Generation (RAG)', 'Fine-tuning LLMs (LoRA based)', 'Working with LLMs']],
     ['Frameworks', ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'LangChain', 'FastAPI', 'Scikit-Learn', 'TensorFlow', 'Transformers', 'HuggingFace']],
     ['Databases', ['MongoDB', 'MySQL', 'FAISS', 'Pinecone']],
     ['Web technologies', ['HTML', 'CSS', 'JavaScript']],
@@ -126,6 +126,7 @@
     const el = $('#repos');
     try {
       const list = await getJSON(API + '/users/' + USER + '/repos?per_page=100&sort=pushed');
+      countUp($('#stat-projects'), list.filter((r) => !r.fork).length, 0, 0);
       const top = list.filter((r) => !r.fork && r.name !== USER).sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at)).slice(0, 6);
       const rows = top.length ? top : list.slice(0, 6);
       if (!rows.length) { el.innerHTML = '<div class="note mono">No public repositories yet.</div>'; return; }

@@ -1,18 +1,18 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:07090d,55:0f3d38,100:2e1065&height=180&section=header&text=Param%20Raval&fontSize=52&fontColor=ffffff&fontAlignY=42&desc=AI%20%2F%20ML%20Engineer%20%C2%B7%20Generative%20AI%20%26%20Agents&descAlignY=66&descSize=18" alt="Param Raval, AI/ML Engineer" width="100%" />
-
 <a href="https://param031010.github.io/Param031010/">
-  <img src="https://img.shields.io/badge/OPEN%20INTERACTIVE%20PORTFOLIO-4fe3c1?style=for-the-badge&labelColor=07090d" alt="Open interactive portfolio" height="42" />
+  <img src="assets/preview.gif" alt="Interactive portfolio of Param Raval, AI/ML Engineer. Click to open." width="100%" />
 </a>
 
-<sub>Live GitHub data, project details, command palette (<code>Ctrl K</code>) and an optional <a href="https://param031010.github.io/Param031010/game/">game mode</a>.</sub>
+**▶ [Open the live interactive portfolio](https://param031010.github.io/Param031010/)** · [Projects](https://param031010.github.io/Param031010/#/projects) · [Repositories](https://param031010.github.io/Param031010/#/repositories) · [Game mode](https://param031010.github.io/Param031010/game/)
+
+<sub>Live GitHub data, project details and a command palette (<code>Ctrl K</code>). Click the preview above to explore it.</sub>
 
 </div>
 
-<br/>
+---
 
-B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technology, Bengaluru**, with a **9.28 CGPA**. I focus on **Generative AI and AI agents**, and I like to turn what I learn into practical, shipped projects.
+**Param Raval, AI/ML Engineer.** B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technology, Bengaluru**, with a **9.28 CGPA**. I focus on **Generative AI and AI agents**, and I like to turn what I learn into practical, shipped projects.
 
 | | |
 |---|---|
@@ -46,6 +46,4 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
 
 ## Connect
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-paramraval-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/paramraval)
-[![LeetCode](https://img.shields.io/badge/LeetCode-Param__03-FFA116?style=flat-square&logo=leetcode&logoColor=black)](https://leetcode.com/Param_03)
-[![Email](https://img.shields.io/badge/Email-paramraval2005@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:paramraval2005@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/paramraval) · [LeetCode](https://leetcode.com/Param_03) · [paramraval2005@gmail.com](mailto:paramraval2005@gmail.com)

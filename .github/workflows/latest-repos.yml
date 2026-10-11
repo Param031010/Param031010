@@ -1,0 +1,38 @@
+name: Update latest repositories
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild repo list in README
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          list=$(gh api "users/$OWNER/repos?sort=pushed&per_page=30&type=owner" \
+            --jq '[.[] | select(.fork == false and .name != env.OWNER)] | .[0:5][]
+                  | "- [**\(.name)**](\(.html_url)) \(if .language then "`" + .language + "`" else "" end) - \(.description // "No description yet") _(updated \(.pushed_at[0:10]))_"')
+          python3 - "$list" <<'PY'
+          import re, sys
+          block = sys.argv[1]
+          text = open("README.md", encoding="utf-8").read()
+          new = f"<!-- REPOS:START -->\n{block}\n<!-- REPOS:END -->"
+          text = re.sub(r"<!-- REPOS:START -->.*?<!-- REPOS:END -->", new, text, flags=re.S)
+          open("README.md", "w", encoding="utf-8").write(text)
+          PY
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --quiet || (git add README.md && git commit -m "chore: refresh latest repos" && git push)

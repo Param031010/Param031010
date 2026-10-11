@@ -14,7 +14,7 @@
   const RING2 = ['Java', 'FastAPI', 'Pandas', 'Scikit-Learn', 'MongoDB', 'Pinecone', 'JavaScript', 'Vercel'];
   const GROUPS = [
     ['Programming languages', ['C', 'Java', 'Python']],
-    ['Generative AI & LLMs', ['Prompt Engineering', 'RAG', 'Fine-tuning LLMs (LoRA based)', 'Working with LLMs']],
+    ['Generative AI & LLMs', ['Prompt Engineering', 'Retrieval-Augmented Generation (RAG)', 'Fine-tuning LLMs (LoRA based)', 'Working with LLMs']],
     ['Frameworks', ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'LangChain', 'FastAPI', 'Scikit-Learn', 'TensorFlow', 'Transformers', 'HuggingFace']],
     ['Databases', ['MongoDB', 'MySQL', 'FAISS', 'Pinecone']],
     ['Web technologies', ['HTML', 'CSS', 'JavaScript']],

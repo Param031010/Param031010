@@ -117,7 +117,7 @@ const DOT = { Python: '#3572a5', JavaScript: '#f1e05a', Java: '#ff9a3c', LangCha
   const W = 418, pad = 18;
   const GROUPS = [
     ['Programming languages', ['C', 'Java', 'Python']],
-    ['Generative AI & LLMs', ['Prompt Engineering', 'RAG', 'Fine-tuning LLMs (LoRA based)', 'Working with LLMs']],
+    ['Generative AI & LLMs', ['Prompt Engineering', 'Retrieval-Augmented Generation (RAG)', 'Fine-tuning LLMs (LoRA based)', 'Working with LLMs']],
     ['Frameworks', ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'LangChain', 'FastAPI', 'Scikit-Learn', 'TensorFlow', 'Transformers', 'HuggingFace']],
     ['Databases', ['MongoDB', 'MySQL', 'FAISS', 'Pinecone']],
     ['Web technologies', ['HTML', 'CSS', 'JavaScript']],

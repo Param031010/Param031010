@@ -26,7 +26,7 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
 <table>
   <tr>
     <td width="50%" valign="middle"><img src="assets/stack-orbit.svg?v=fe5faa0" width="100%" alt="Orbit of technologies: Python, LangChain, TensorFlow, HuggingFace, Java, FastAPI, Pandas, Scikit-Learn, MongoDB, Pinecone, JavaScript, Vercel."></td>
-    <td width="50%" valign="top"><img src="assets/stack-groups.svg?v=c978acd" width="100%" alt="Programming languages: C, Java, Python. Generative AI and LLMs: prompt engineering, RAG, fine-tuning LLMs (LoRA based), working with LLMs. Frameworks: NumPy, Pandas, Matplotlib, Seaborn, LangChain, FastAPI, Scikit-Learn, TensorFlow, Transformers, HuggingFace. Databases: MongoDB, MySQL, FAISS, Pinecone. Web technologies: HTML, CSS, JavaScript. Tools and deployment: Git and GitHub, REST APIs, Vercel. Operating systems: Windows."></td>
+    <td width="50%" valign="top"><img src="assets/stack-groups.svg?v=cc5adb3" width="100%" alt="Programming languages: C, Java, Python. Generative AI and LLMs: prompt engineering, Retrieval-Augmented Generation (RAG), fine-tuning LLMs (LoRA based), working with LLMs. Frameworks: NumPy, Pandas, Matplotlib, Seaborn, LangChain, FastAPI, Scikit-Learn, TensorFlow, Transformers, HuggingFace. Databases: MongoDB, MySQL, FAISS, Pinecone. Web technologies: HTML, CSS, JavaScript. Tools and deployment: Git and GitHub, REST APIs, Vercel. Operating systems: Windows."></td>
   </tr>
 </table>
 

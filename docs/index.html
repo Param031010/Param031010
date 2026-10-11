@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Param Raval · Interactive Portfolio</title>
+<meta name="description" content="Walk through a pixel-art world to explore Param Raval's projects, skills, patents and contact details. AI/ML engineer focused on Generative AI and agents.">
+<meta name="theme-color" content="#070b18">
+<meta property="og:title" content="Param Raval · Interactive Portfolio">
+<meta property="og:description" content="An explorable pixel-art world: projects, skills, patents and contact. AI/ML engineer focused on Generative AI and agents.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game" tabindex="0" aria-label="Interactive pixel-art world. Use the Map or Résumé buttons for a text-based version."></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<header id="hud" hidden>
+  <div class="brand"><span class="px">PARAM RAVAL</span><small>Interactive Portfolio</small></div>
+  <div class="xp" aria-label="Exploration progress">
+    <div class="xp-top"><span id="lvl" class="px">LV 1 · NEWCOMER</span><span id="xpcount">0/6</span></div>
+    <div class="xp-bar"><i id="xpfill"></i></div>
+  </div>
+  <div class="hud-btns">
+    <button id="btn-map" type="button">☰ Map</button>
+    <button id="btn-resume" type="button">📄 Résumé view</button>
+    <button id="btn-sound" type="button" aria-pressed="true" title="Toggle sound">🔊</button>
+  </div>
+</header>
+
+<div id="hint" aria-live="polite" hidden></div>
+<button id="act" type="button" hidden>Enter ▸</button>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<section id="intro">
+  <div class="intro-card">
+    <p class="px eyebrow">AI / ML ENGINEER · GENERATIVE AI &amp; AGENTS</p>
+    <h1 class="px">PARAM<br>RAVAL</h1>
+    <p class="sub">Step into a small pixel-art world. Each building holds a part of my story: projects, skills, patents and how to reach me.</p>
+    <div class="intro-btns">
+      <button id="btn-start" type="button" class="primary px">▶ START</button>
+      <button id="btn-skip" type="button">Skip to résumé view</button>
+    </div>
+    <p class="keys"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / arrows to move</span><span><kbd>E</kbd> to enter</span><span>or tap to walk on touch</span></p>
+  </div>
+</section>
+
+<aside id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" hidden>
+  <div class="panel-card">
+    <div class="panel-head">
+      <span id="panel-icon" aria-hidden="true"></span>
+      <h2 id="panel-title" class="px"></h2>
+      <button id="panel-close" type="button" aria-label="Close">✕</button>
+    </div>
+    <div id="panel-body"></div>
+    <div class="panel-foot"><span id="panel-note"></span><button id="panel-back" type="button">Back to world <kbd>Esc</kbd></button></div>
+  </div>
+</aside>
+
+<nav id="map" role="dialog" aria-modal="true" aria-label="Fast travel" hidden>
+  <div class="panel-card small">
+    <div class="panel-head"><h2 class="px">FAST TRAVEL</h2><button id="map-close" type="button" aria-label="Close">✕</button></div>
+    <ul id="map-list"></ul>
+    <p class="muted">Visited zones are marked ✔. Visit all six to complete the map.</p>
+  </div>
+</nav>
+
+<noscript>
+  <div style="position:fixed;inset:0;background:#070b18;color:#e6ebff;padding:32px;font-family:system-ui,sans-serif;overflow:auto;z-index:99">
+    <h1>Param Raval</h1>
+    <p>B.Tech Computer Science (AI &amp; ML), CMR Institute of Technology, Bengaluru · CGPA 9.28 · Two patents filed.</p>
+    <p><a style="color:#22d3ee" href="https://github.com/Param031010">GitHub</a> ·
+       <a style="color:#22d3ee" href="https://www.linkedin.com/in/paramraval">LinkedIn</a> ·
+       <a style="color:#22d3ee" href="https://leetcode.com/Param_03">LeetCode</a> ·
+       <a style="color:#22d3ee" href="mailto:paramraval2005@gmail.com">paramraval2005@gmail.com</a></p>
+    <p>This page is an interactive game and needs JavaScript.</p>
+  </div>
+</noscript>
+
+<script src="game.js"></script>
+</body>
+</html>

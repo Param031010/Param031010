@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Param031010"><img src="assets/hero.svg?v=3c0d4ff" width="100%" alt="Param Raval, AI/ML Engineer. Stats: 2 patents filed, 9.28 CGPA, number of projects on GitHub, and contributions in the last year."></a>
+  <a href="https://github.com/Param031010"><img src="assets/hero.svg?v=aa3db97" width="100%" alt="Param Raval, AI/ML Engineer. Stats: 2 patents filed, 9.28 CGPA, number of projects on GitHub, and contributions in the last year."></a>
 </p>
 
 B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technology, Bengaluru**, with a **9.28 CGPA**. I focus on **Generative AI and AI agents**, and I like to turn what I learn into practical, shipped projects.
@@ -29,6 +29,12 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
     <td width="50%" valign="top"><img src="assets/stack-groups.svg?v=cc5adb3" width="100%" alt="Programming languages: C, Java, Python. Generative AI and LLMs: prompt engineering, Retrieval-Augmented Generation (RAG), fine-tuning LLMs (LoRA based), working with LLMs. Frameworks: NumPy, Pandas, Matplotlib, Seaborn, LangChain, FastAPI, Scikit-Learn, TensorFlow, Transformers, HuggingFace. Databases: MongoDB, MySQL, FAISS, Pinecone. Web technologies: HTML, CSS, JavaScript. Tools and deployment: Git and GitHub, REST APIs, Vercel. Operating systems: Windows."></td>
   </tr>
 </table>
+
+## Activity
+
+<p align="center">
+  <a href="https://github.com/Param031010"><img src="assets/activity-game.svg?v=301f17f" width="100%" alt="Contribution Invaders: my GitHub contributions over the last year as a small arcade game. Each active day is an alien block that a ship shoots as it sweeps across the weeks."></a>
+</p>
 
 ## Connect
 

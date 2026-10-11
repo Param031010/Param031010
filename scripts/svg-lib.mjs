@@ -82,7 +82,7 @@ export function heroSvg(n) {
   const edges = [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 3], [0, 1], [1, 2], [3, 4]];
   const tiles = [
     [String(n.patents ?? 2), 'Patents filed'], [n.cgpa ?? '9.28', 'CGPA'],
-    [String(n.projects ?? 4), 'Featured projects'], [String(n.contributions), 'Contributions / yr']
+    [String(n.projects), 'Projects on GitHub'], [String(n.contributions), 'Contributions / yr']
   ];
   const tw = (W - 64 - 3 * 14) / 4;
   const tileSvg = tiles.map(([v, l], i) => {

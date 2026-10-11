@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Param031010"><img src="assets/hero.svg?v=2114614" width="100%" alt="Param Raval, AI/ML Engineer. Stats: 2 patents filed, 9.28 CGPA, number of projects on GitHub, and contributions in the last year."></a>
+  <a href="https://github.com/Param031010"><img src="assets/hero.svg?v=120b5d7" width="100%" alt="Param Raval, AI/ML Engineer. Stats: 2 patents filed, 9.28 CGPA, number of projects on GitHub, and contributions in the last year."></a>
 </p>
 
 B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technology, Bengaluru**, with a **9.28 CGPA**. I focus on **Generative AI and AI agents**, and I like to turn what I learn into practical, shipped projects.

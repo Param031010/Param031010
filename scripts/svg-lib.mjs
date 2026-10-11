@@ -64,7 +64,7 @@ export const dotGridUse = (w, h, id = 'dg') => `<rect width="${w}" height="${h}"
 
 /** Hero: title, typing line, stat tiles. `n` = live numbers. */
 export function heroSvg(n) {
-  const W = 838, H = 350;
+  const W = 838, H = 328, UP = 22;
   const phrases = ['AI agents', 'data pipelines', 'things that ship'];
   const cw = 17 * 0.6, X0 = 120, Y = 198, SLOT = 100 / 3, DUR = 18;
   const typing = phrases.map((p, i) => {
@@ -96,22 +96,19 @@ export function heroSvg(n) {
   const meta = `${n.repos ?? ''}${n.repos != null ? ' repositories' : ''}${n.followers != null ? ' · ' + n.followers + (n.followers === 1 ? ' follower' : ' followers') : ''}`.trim();
   const css = `.mr{stroke:${T.ac};stroke-opacity:.4;stroke-width:1.4;stroke-dasharray:4 6}
 ${motion(`.mr{animation:mr 2.4s linear infinite}@keyframes mr{to{stroke-dashoffset:-40}}.pl{animation:pl 3.2s ease-in-out infinite}@keyframes pl{50%{transform:scale(1.28)}}
-.bd{animation:bd 2.4s ease-out infinite}@keyframes bd{0%{r:5;opacity:.9}100%{r:13;opacity:0}}
 ${typing.map((t) => t.css).join('\n')}`)}`;
   return svg({
     w: W, h: H, fonts: ['display-800', 'mono-500', 'body-400'], css, defs: dotGrid(W, 200),
     title: 'Param Raval, AI/ML Engineer',
     desc: `Hero panel. Stats: ${tiles.map(([v, l]) => v + ' ' + l).join(', ')}.${meta ? ' ' + meta + '.' : ''}`,
-    body: `${dotGridUse(W, 200)}
-<circle cx="36" cy="40" r="4" fill="${T.ac}"/><circle class="bd" cx="36" cy="40" r="5" fill="none" stroke="${T.ac}" stroke-width="1.5" opacity="0"/>
-<text class="m" x="50" y="44" font-size="11" letter-spacing="1.6" fill="${T.mu}">PARAM031010 · OVERVIEW</text>
+    body: `<g transform="translate(0 -${UP})">${dotGridUse(W, 200)}
 <text class="d" x="32" y="106" font-size="46" font-weight="800" fill="${T.tx}" letter-spacing="-1">Param Raval,</text>
 <text class="d" x="32" y="156" font-size="46" font-weight="800" fill="${T.tx}" letter-spacing="-1">AI/ML Engineer</text>
 <text class="b" x="32" y="${Y}" font-size="17" fill="${T.mu}">Building</text>
 ${typing.map((t) => t.svg).join('\n')}
 ${lines}${circles}
 ${meta ? `<text class="m" x="${W - 32}" y="212" font-size="10.5" letter-spacing="1" text-anchor="end" fill="${T.mu}">${esc(meta.toUpperCase())}</text>` : ''}
-${tileSvg}`
+${tileSvg}</g>`
   });
 }
 

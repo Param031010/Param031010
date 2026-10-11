@@ -26,16 +26,16 @@ const PROJECTS = [
     points: ['Chat that answers from your own health documents instead of guessing', 'Symptom knowledge graphs to relate symptoms and conditions', 'Nearby-care search to find a clinic or hospital close to you', 'Built in TypeScript as a full application'],
   },
   {
-    id: 'gitshow', name: 'GitShow', art: 'flow',
+    id: 'gitshow', name: 'GitShow', art: 'flow', demo: 'https://git-show-seven.vercel.app/',
     tags: ['Python', 'React', 'AI agents'],
     desc: 'Chat assistant for exploring and acting on GitHub repos, with confirm-before-write.',
-    points: ['Explore repositories through conversation', 'Can act on repos, but asks for confirmation before any write', 'Python backend with a React interface'],
+    points: ['Explore repositories through conversation', 'Can act on repos, but asks for confirmation before any write', 'Python backend with a React interface', 'Deployed on Vercel with a live demo'],
   },
   {
-    id: 'wayfarer', name: 'Wayfarer', art: 'route',
-    tags: ['AI agents'],
-    desc: 'AI-driven application exploring agent-based systems.',
-    points: ['Built to explore how agent-based systems plan and act', 'Part of my Generative AI and agents work alongside MedSys AI and GitShow'],
+    id: 'wayfarer', name: 'Wayfarer', art: 'route', url: 'https://github.com/Priyanshu-Madhup/Wayferer',
+    tags: ['Python', 'React', 'AI agents'],
+    desc: 'AI travel planner: a Gemini-powered agent researches a trip with tools, then shows the itinerary, budget and map.',
+    points: ['Agentic tool-calling loop that streams its research progress live to the UI', '15 tools covering places, routing, weather, flights, hotels, events, visas and currency', 'Budget, optimization and validation done in deterministic code, not by the LLM', 'FastAPI backend with a React + Vite frontend'],
   },
   {
     id: 'dispatch', name: 'Dispatch.AI', repo: 'Dispatch.AI', art: 'wave',
@@ -216,7 +216,9 @@ async function openProject(id) {
   const repo = state.repos && p.repo ? state.repos.find(r => r.name === p.repo) : null;
   if (p.repo) actions.push(`<a class="btn primary" href="https://github.com/${USER}/${esc(p.repo)}" target="_blank" rel="noopener">View repository ↗</a>`);
   if (repo && repo.homepage) actions.push(`<a class="btn" href="${esc(repo.homepage)}" target="_blank" rel="noopener">Live demo ↗</a>`);
-  if (!p.repo) actions.push(`<p class="note">The source for this project isn't linked from my public profile yet.</p>`);
+  if (p.url) actions.push(`<a class="btn primary" href="${esc(p.url)}" target="_blank" rel="noopener">View repository ↗</a>`);
+  if (p.demo) actions.push(`<a class="btn primary" href="${esc(p.demo)}" target="_blank" rel="noopener">Live demo ↗</a>`);
+  if (!p.repo && !p.url && !p.demo) actions.push(`<p class="note">No public link yet.</p>`);
   $('#pd-actions').innerHTML = actions.join('');
   if (!dlg.open) dlg.showModal();
   if (p.repo) {

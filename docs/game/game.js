@@ -45,8 +45,8 @@ const ZONES = [
       <p class="muted">Difficulty stars are my own rating of how much I learned and how complex the build was.</p>
       <div class="cards">
         ${project('MedSys AI', 'https://github.com/Param031010/MedSysAI_01', 5, 'Personal health app with document-grounded chat, symptom knowledge graphs and nearby-care search.', ['TypeScript', 'GenAI', 'Knowledge graph'])}
-        ${project('GitShow', '', 4, 'AI project exploring agent-based workflows.', ['AI agents'])}
-        ${project('Wayfarer', '', 4, 'AI-driven application built to explore agent-based systems.', ['AI agents'])}
+        ${project('GitShow', 'https://git-show-seven.vercel.app/', 4, 'Chat assistant for exploring and acting on GitHub repos, with confirm-before-write. Live demo.', ['Python', 'React', 'AI agents'])}
+        ${project('Wayfarer', 'https://github.com/Priyanshu-Madhup/Wayferer', 4, 'AI travel planner: a Gemini-powered agent researches trips with tools, then shows itinerary, budget and map.', ['Python', 'React', 'AI agents'])}
         ${project('Traffic Accident Analytics', 'https://github.com/Param031010/MLOPS', 4, 'End-to-end ETL, API, dashboard and MLOps pipeline for accident data.', ['Python', 'ETL', 'MLOps', 'Dashboard'])}
         ${project('Chatbot', 'https://chatbot-f4ki.vercel.app', 3, 'Deployed conversational assistant with a live demo on Vercel.', ['JavaScript', 'Vercel'])}
         ${project('Dispatch.AI', 'https://github.com/Param031010/Dispatch.AI', 3, 'AI-assisted dispatch application.', ['TypeScript'])}

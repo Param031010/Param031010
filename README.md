@@ -23,8 +23,8 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
 ## Featured projects
 
 1. [**MedSys AI**](https://github.com/Param031010/MedSysAI_01): health app with document-grounded chat, symptom knowledge graphs and nearby-care search
-2. **GitShow**: chat assistant for exploring and acting on GitHub repos, with confirm-before-write
-3. **Wayfarer**: AI-driven application exploring agent-based systems
+2. [**GitShow**](https://git-show-seven.vercel.app/): chat assistant for exploring and acting on GitHub repos, with confirm-before-write
+3. [**Wayfarer**](https://github.com/Priyanshu-Madhup/Wayferer): AI travel planner, a Gemini-powered agent that researches trips and builds the itinerary, budget and map
 4. [**Dispatch.AI**](https://github.com/Param031010/Dispatch.AI): AI-assisted dispatch application
 
 ## Stack

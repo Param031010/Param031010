@@ -124,3 +124,49 @@ export function bumpReadmeVersions(readmePath = 'README.md', assetsDir = 'assets
   });
   writeFileSync(readmePath, md);
 }
+
+/** "Contribution Invaders": each contribution day is an alien; a ship sweeps the columns and shoots them. */
+export function gameSvg(days, total) {
+  const W = 838, PAD = 28, TOP = 78;
+  const pad = new Date(days[0].date + 'T00:00:00Z').getUTCDay();
+  const weeks = Math.ceil((pad + days.length) / 7);
+  const pitch = (W - 2 * PAD) / weeks, size = Math.max(6, pitch - 3.4);
+  const gridH = 7 * pitch, shipY = TOP + gridH + 36, H = Math.ceil(shipY + 40);
+  const D = 24, SWEEP = 92;
+  const lvlOpacity = [0, 0.32, 0.58, 0.82, 1];
+  const colX = (w) => PAD + w * pitch;
+  const active = new Set();
+  let cells = '', best = 0;
+  days.forEach((d, i) => {
+    const w = Math.floor((pad + i) / 7), r = (pad + i) % 7;
+    const x = colX(w).toFixed(1), y = (TOP + r * pitch).toFixed(1);
+    best = Math.max(best, d.count);
+    if (d.level > 0) {
+      active.add(w);
+      cells += `<rect class="k${w}" x="${x}" y="${y}" width="${size.toFixed(1)}" height="${size.toFixed(1)}" rx="3" fill="${T.ac}" fill-opacity="${lvlOpacity[Math.min(4, d.level)]}"/>`;
+    } else {
+      cells += `<rect x="${x}" y="${y}" width="${size.toFixed(1)}" height="${size.toFixed(1)}" rx="3" fill="#fff" fill-opacity=".05"/>`;
+    }
+  });
+  let css = '', lasers = '';
+  for (const w of active) {
+    const tc = (w / (weeks - 1)) * SWEEP, f = (n) => Math.max(0, n).toFixed(2);
+    css += `.k${w}{animation:k${w} ${D}s linear infinite}.z${w}{animation:z${w} ${D}s linear infinite}
+@keyframes k${w}{0%,${f(tc + 0.4)}%{opacity:1}${f(tc + 0.9)}%{opacity:0}96%{opacity:0}98%,100%{opacity:1}}
+@keyframes z${w}{0%,${f(tc - 0.3)}%{opacity:0}${f(tc)}%{opacity:1}${f(tc + 0.7)}%{opacity:0}100%{opacity:0}}`;
+    lasers += `<rect class="z${w}" x="${(colX(w) + size / 2 - 1.2).toFixed(1)}" y="${TOP - 4}" width="2.4" height="${(shipY - TOP - 6).toFixed(1)}" rx="1.2" fill="${T.vi}" opacity="0"/>`;
+  }
+  const travel = ((weeks - 1) * pitch).toFixed(1);
+  css = motion(`.ship{animation:ship ${D}s linear infinite}@keyframes ship{0%{transform:translateX(0)}${SWEEP}%{transform:translateX(${travel}px)}97%{transform:translateX(0)}100%{transform:translateX(0)}}` + css);
+  const start = (colX(0) + size / 2).toFixed(1);
+  return svg({
+    w: W, h: H, fonts: ['mono-500', 'display-700'], css, radius: 22,
+    title: 'Contribution Invaders',
+    desc: `Game-style view of ${total} GitHub contributions over the last year. Each active day is an alien block; a ship sweeps across the weeks and shoots them, then they respawn.`,
+    body: `<text class="m" x="${PAD}" y="40" font-size="11" letter-spacing="1.6" fill="${T.mu}">CONTRIBUTION INVADERS</text>
+<text class="m" x="${W - PAD}" y="40" font-size="11" letter-spacing="1.2" text-anchor="end" fill="${T.mu}">${esc(String(total))} CONTRIBUTIONS · BEST DAY ${best}</text>
+${cells}${lasers}
+<line x1="${PAD}" x2="${W - PAD}" y1="${shipY + 16}" y2="${shipY + 16}" stroke="#fff" stroke-opacity=".12"/>
+<g transform="translate(${start} ${shipY})"><g class="ship"><path d="M0 -12L7 -2H14V12H-14V-2H-7Z" fill="${T.ac}"/><rect x="-2" y="-16" width="4" height="6" rx="1" fill="${T.vi}"/></g></g>`
+  });
+}

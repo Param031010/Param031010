@@ -29,16 +29,15 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
 
 ## Stack
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+| | |
+|---|---|
+| **Programming languages** | C, Java, Python |
+| **Generative AI & LLMs** | Prompt engineering, Retrieval-Augmented Generation (RAG), fine-tuning LLMs (LoRA based), working with LLMs |
+| **Frameworks** | NumPy, Pandas, Matplotlib, Seaborn, LangChain, FastAPI, Scikit-Learn, TensorFlow, Transformers, HuggingFace |
+| **Databases** | MongoDB, MySQL, FAISS, Pinecone |
+| **Web technologies** | HTML, CSS, JavaScript |
+| **Tools & deployment** | Git & GitHub, REST APIs, Vercel |
+| **Operating systems** | Windows |
 
 ## Latest repositories
 

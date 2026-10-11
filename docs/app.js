@@ -8,7 +8,7 @@ const USER = 'Param031010';
 const API = 'https://api.github.com';
 const CONTRIB_API = `https://github-contributions-api.jogruber.de/v4/${USER}?y=last`;
 
-const LANG = { TypeScript: '#3178c6', JavaScript: '#f1e05a', Python: '#4b8bbe', HTML: '#e34c26', CSS: '#8b5cf6', Java: '#e08a2c', 'Jupyter Notebook': '#da5b0b', React: '#61dafb', 'Node.js': '#6cc24a', Docker: '#2496ed', Git: '#f05032', Pandas: '#8b7cf6', 'scikit-learn': '#f7931e', Shell: '#89e051' };
+const LANG = { C: '#a8b9cc', Java: '#e08a2c', Python: '#4b8bbe', TypeScript: '#3178c6', JavaScript: '#f1e05a', HTML: '#e34c26', CSS: '#8b5cf6', 'Jupyter Notebook': '#da5b0b', React: '#61dafb', NumPy: '#4dabcf', Pandas: '#8b7cf6', Matplotlib: '#3d7ea6', Seaborn: '#4c72b0', LangChain: '#1c9c6b', FastAPI: '#09a38f', 'Scikit-Learn': '#f7931e', TensorFlow: '#ff8a00', Transformers: '#ffcc4d', HuggingFace: '#ffd21e', MongoDB: '#47a248', MySQL: '#2a8fb5', FAISS: '#4f7cff', Pinecone: '#7b8cff', Git: '#f05032', 'Git & GitHub': '#f05032', 'REST APIs': '#5fe6d0', Vercel: '#e8edf3', Windows: '#3b9cff', 'Prompt Engineering': '#b8a2ff', RAG: '#5fe6d0', 'Fine-tuning LLMs (LoRA)': '#ff7eb6', 'Working with LLMs': '#b8a2ff', Shell: '#89e051' };
 
 // Featured projects, in the order shown on the page.
 const ART = {
@@ -46,14 +46,17 @@ const PROJECTS = [
 ];
 
 const SKILLS = {
-  Languages: ['Python', 'TypeScript', 'JavaScript', 'Java'],
-  Web: ['React', 'Node.js'],
-  'ML & Data': ['scikit-learn', 'Pandas'],
-  Tooling: ['Docker', 'Git'],
+  'Programming Languages': ['C', 'Java', 'Python'],
+  'Generative AI & LLMs': ['Prompt Engineering', 'RAG', 'Fine-tuning LLMs (LoRA)', 'Working with LLMs'],
+  Frameworks: ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'LangChain', 'FastAPI', 'Scikit-Learn', 'TensorFlow', 'Transformers', 'HuggingFace'],
+  Databases: ['MongoDB', 'MySQL', 'FAISS', 'Pinecone'],
+  'Web Technologies': ['HTML', 'CSS', 'JavaScript'],
+  'Tools & Deployment': ['Git & GitHub', 'REST APIs', 'Vercel'],
+  'Operating Systems': ['Windows'],
 };
 const ORBIT = {
-  a: ['Python', 'TypeScript', 'JavaScript', 'Java'],
-  b: ['React', 'Node.js', 'scikit-learn', 'Pandas', 'Docker', 'Git'],
+  a: ['Python', 'LangChain', 'TensorFlow', 'HuggingFace'],
+  b: ['Java', 'FastAPI', 'Pandas', 'Scikit-Learn', 'MongoDB', 'Pinecone', 'JavaScript', 'Vercel'],
 };
 
 /* ------------------------------------------------------------------ *

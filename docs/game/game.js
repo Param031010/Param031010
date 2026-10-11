@@ -58,11 +58,13 @@ const ZONES = [
     id: 'skills', name: 'ARMORY', icon: '⚔️', color: '#22d3ee', col: 2, row: 0,
     title: 'Armory · Skills',
     html: `
-      <h4>LANGUAGES</h4>${tag('Python', 'TypeScript', 'JavaScript', 'Java', 'HTML / CSS')}
-      <h4>AI &amp; GENERATIVE AI</h4>${tag('LLM applications', 'Document-grounded chat (RAG)', 'AI agents', 'Knowledge graphs', 'Prompt engineering')}
-      <h4>ML &amp; DATA</h4>${tag('scikit-learn', 'Pandas', 'Jupyter', 'ETL pipelines', 'MLOps')}
-      <h4>WEB &amp; BACKEND</h4>${tag('React', 'Node.js', 'Vite', 'Streamlit', 'REST APIs')}
-      <h4>TOOLS</h4>${tag('Git &amp; GitHub', 'Docker', 'Vercel')}`,
+      <h4>PROGRAMMING LANGUAGES</h4>${tag('C', 'Java', 'Python')}
+      <h4>GENERATIVE AI &amp; LLMS</h4>${tag('Prompt Engineering', 'Retrieval-Augmented Generation (RAG)', 'Fine-tuning LLMs (LoRA based)', 'Working with LLMs')}
+      <h4>FRAMEWORKS</h4>${tag('NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'LangChain', 'FastAPI', 'Scikit-Learn', 'TensorFlow', 'Transformers', 'HuggingFace')}
+      <h4>DATABASES</h4>${tag('MongoDB', 'MySQL', 'FAISS', 'Pinecone')}
+      <h4>WEB TECHNOLOGIES</h4>${tag('HTML', 'CSS', 'JavaScript')}
+      <h4>TOOLS &amp; DEPLOYMENT</h4>${tag('Git &amp; GitHub', 'REST APIs', 'Vercel')}
+      <h4>OPERATING SYSTEMS</h4>${tag('Windows')}`,
   },
   {
     id: 'awards', name: 'TROPHY ROOM', icon: '🏆', color: '#fbbf24', col: 0, row: 1,

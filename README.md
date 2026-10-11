@@ -1,52 +1,31 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:070b18,60:2e1065,100:0e7490&height=190&section=header&text=PARAM%20RAVAL&fontSize=54&fontColor=ffffff&fontAlignY=42&desc=AI%20%2F%20ML%20Engineer%20%C2%B7%20Generative%20AI%20%26%20Agents&descAlignY=66&descSize=18" alt="Param Raval, AI/ML Engineer" width="100%" />
-
-### My portfolio is a game. Walk in and explore it.
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:07090d,55:0f3d38,100:2e1065&height=180&section=header&text=Param%20Raval&fontSize=52&fontColor=ffffff&fontAlignY=42&desc=AI%20%2F%20ML%20Engineer%20%C2%B7%20Generative%20AI%20%26%20Agents&descAlignY=66&descSize=18" alt="Param Raval, AI/ML Engineer" width="100%" />
 
 <a href="https://param031010.github.io/Param031010/">
-  <img src="https://img.shields.io/badge/%E2%96%B6%20%20PLAY%20THE%20PORTFOLIO-22d3ee?style=for-the-badge&labelColor=0b1020" alt="Play the portfolio" height="44" />
+  <img src="https://img.shields.io/badge/OPEN%20INTERACTIVE%20PORTFOLIO-4fe3c1?style=for-the-badge&labelColor=07090d" alt="Open interactive portfolio" height="42" />
 </a>
 
-<sub>A pixel-art world with six explorable buildings. Prefer plain text? Use the <a href="https://param031010.github.io/Param031010/#resume">résumé view</a>.</sub>
+<sub>Live GitHub data, project details, command palette (<code>Ctrl K</code>) and an optional <a href="https://param031010.github.io/Param031010/game/">game mode</a>.</sub>
 
 </div>
 
 <br/>
 
-## The world
-
-Each building in the game holds one part of my profile. You can also jump straight to a zone.
-
-| Zone | What's inside | Direct link |
-|---|---|---|
-| 🏰 **Guild Hall** | Who I am, education, interests | [open](https://param031010.github.io/Param031010/#about) |
-| 📜 **Quest Board** | Projects with live demos and repos | [open](https://param031010.github.io/Param031010/#projects) |
-| ⚔️ **Armory** | Languages, AI/ML stack, tools | [open](https://param031010.github.io/Param031010/#skills) |
-| 🏆 **Trophy Room** | Patents and achievements | [open](https://param031010.github.io/Param031010/#awards) |
-| 🕹️ **Arcade** | Live GitHub and LeetCode stats | [open](https://param031010.github.io/Param031010/#arcade) |
-| 🌀 **Portal** | Contact and links | [open](https://param031010.github.io/Param031010/#contact) |
-
-**Controls:** `W A S D` or arrow keys to move, `E` to enter a building, `M` for the fast-travel map. On touch devices, tap to walk and tap a building to visit it.
-
----
-
-## About
-
 B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technology, Bengaluru**, with a **9.28 CGPA**. I focus on **Generative AI and AI agents**, and I like to turn what I learn into practical, shipped projects.
 
-- 📄 **Two patents filed:** an AI-powered autonomous height detection system, and a multilingual transliteration system
-- 🤖 **Agent-based projects:** MedSys AI, GitShow, Wayfarer
-- 📈 **End-to-end builds:** data pipelines, APIs, dashboards and deployed apps
+| | |
+|---|---|
+| 📄 **2 patents filed** | AI-powered autonomous height detection system · Multilingual transliteration system |
+| 🤖 **Agent-based projects** | MedSys AI · GitShow · Wayfarer |
+| 🏗️ **End-to-end builds** | Data pipelines, APIs, dashboards and deployed apps |
 
 ## Featured projects
 
-| Project | Description | Stack |
-|---|---|---|
-| [**MedSys AI**](https://github.com/Param031010/MedSysAI_01) | Health app with document-grounded chat, symptom knowledge graphs and nearby-care search | TypeScript |
-| [**Traffic Accident Analytics**](https://github.com/Param031010/MLOPS) | ETL, API, dashboard and MLOps pipeline | Python |
-| [**Chatbot**](https://chatbot-f4ki.vercel.app) | Deployed conversational assistant, live demo | JavaScript, Vercel |
-| [**Dispatch.AI**](https://github.com/Param031010/Dispatch.AI) | AI-assisted dispatch application | TypeScript |
+1. [**MedSys AI**](https://github.com/Param031010/MedSysAI_01): health app with document-grounded chat, symptom knowledge graphs and nearby-care search
+2. **GitShow**: chat assistant for exploring and acting on GitHub repos, with confirm-before-write
+3. **Wayfarer**: AI-driven application exploring agent-based systems
+4. [**Dispatch.AI**](https://github.com/Param031010/Dispatch.AI): AI-assisted dispatch application
 
 ## Stack
 
@@ -71,7 +50,3 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-paramraval-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/paramraval)
 [![LeetCode](https://img.shields.io/badge/LeetCode-Param__03-FFA116?style=flat-square&logo=leetcode&logoColor=black)](https://leetcode.com/Param_03)
 [![Email](https://img.shields.io/badge/Email-paramraval2005@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:paramraval2005@gmail.com)
-
-<div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0e7490,40:2e1065,100:070b18&height=70&section=footer" width="100%" alt="" />
-</div>

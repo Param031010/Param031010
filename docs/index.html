@@ -3,83 +3,196 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Param Raval · Interactive Portfolio</title>
-<meta name="description" content="Walk through a pixel-art world to explore Param Raval's projects, skills, patents and contact details. AI/ML engineer focused on Generative AI and agents.">
-<meta name="theme-color" content="#070b18">
-<meta property="og:title" content="Param Raval · Interactive Portfolio">
-<meta property="og:description" content="An explorable pixel-art world: projects, skills, patents and contact. AI/ML engineer focused on Generative AI and agents.">
+<title>Param Raval · AI/ML Engineer</title>
+<meta name="description" content="Param Raval, AI/ML engineer focused on Generative AI and agents. B.Tech CSE (AI & ML), 9.28 CGPA, two patents filed. Projects, stack, live GitHub activity.">
+<meta name="theme-color" content="#07090d">
+<meta property="og:title" content="Param Raval · AI/ML Engineer">
+<meta property="og:description" content="Generative AI and agents. Two patents filed. Live projects, stack and GitHub activity.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
 </head>
 <body>
-<canvas id="game" tabindex="0" aria-label="Interactive pixel-art world. Use the Map or Résumé buttons for a text-based version."></canvas>
-<div class="vignette" aria-hidden="true"></div>
 
-<header id="hud" hidden>
-  <div class="brand"><span class="px">PARAM RAVAL</span><small>Interactive Portfolio</small></div>
-  <div class="xp" aria-label="Exploration progress">
-    <div class="xp-top"><span id="lvl" class="px">LV 1 · NEWCOMER</span><span id="xpcount">0/6</span></div>
-    <div class="xp-bar"><i id="xpfill"></i></div>
-  </div>
-  <div class="hud-btns">
-    <button id="btn-map" type="button">☰ Map</button>
-    <button id="btn-resume" type="button">📄 Résumé view</button>
-    <button id="btn-sound" type="button" aria-pressed="true" title="Toggle sound">🔊</button>
+<header class="topbar">
+  <a class="who" href="#/overview"><i class="live-dot"></i><span>Param031010</span></a>
+  <div class="top-right">
+    <button id="open-palette" class="kbtn" type="button" aria-label="Open command palette"><span>Search</span><kbd>Ctrl K</kbd></button>
+    <a class="gamelink" href="game/">🎮 Game mode</a>
+    <span id="crumb" class="crumb">Overview</span>
   </div>
 </header>
 
-<div id="hint" aria-live="polite" hidden></div>
-<button id="act" type="button" hidden>Enter ▸</button>
-<div id="toast" role="status" aria-live="polite"></div>
-
-<section id="intro">
-  <div class="intro-card">
-    <p class="px eyebrow">AI / ML ENGINEER · GENERATIVE AI &amp; AGENTS</p>
-    <h1 class="px">PARAM<br>RAVAL</h1>
-    <p class="sub">Step into a small pixel-art world. Each building holds a part of my story: projects, skills, patents and how to reach me.</p>
-    <div class="intro-btns">
-      <button id="btn-start" type="button" class="primary px">▶ START</button>
-      <button id="btn-skip" type="button">Skip to résumé view</button>
-    </div>
-    <p class="keys"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / arrows to move</span><span><kbd>E</kbd> to enter</span><span>or tap to walk on touch</span></p>
-  </div>
-</section>
-
-<aside id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" hidden>
-  <div class="panel-card">
-    <div class="panel-head">
-      <span id="panel-icon" aria-hidden="true"></span>
-      <h2 id="panel-title" class="px"></h2>
-      <button id="panel-close" type="button" aria-label="Close">✕</button>
-    </div>
-    <div id="panel-body"></div>
-    <div class="panel-foot"><span id="panel-note"></span><button id="panel-back" type="button">Back to world <kbd>Esc</kbd></button></div>
-  </div>
-</aside>
-
-<nav id="map" role="dialog" aria-modal="true" aria-label="Fast travel" hidden>
-  <div class="panel-card small">
-    <div class="panel-head"><h2 class="px">FAST TRAVEL</h2><button id="map-close" type="button" aria-label="Close">✕</button></div>
-    <ul id="map-list"></ul>
-    <p class="muted">Visited zones are marked ✔. Visit all six to complete the map.</p>
-  </div>
+<nav class="tabs" id="tabs" aria-label="Profile sections">
+  <a href="#/overview" data-tab="overview">Overview</a>
+  <a href="#/repositories" data-tab="repositories">Repositories <b id="n-repos" class="count"></b></a>
+  <a href="#/projects" data-tab="projects">Projects</a>
+  <a href="#/packages" data-tab="packages">Packages</a>
+  <a href="#/stars" data-tab="stars">Stars</a>
+  <i class="tab-ink" id="tab-ink"></i>
 </nav>
 
-<noscript>
-  <div style="position:fixed;inset:0;background:#070b18;color:#e6ebff;padding:32px;font-family:system-ui,sans-serif;overflow:auto;z-index:99">
-    <h1>Param Raval</h1>
-    <p>B.Tech Computer Science (AI &amp; ML), CMR Institute of Technology, Bengaluru · CGPA 9.28 · Two patents filed.</p>
-    <p><a style="color:#22d3ee" href="https://github.com/Param031010">GitHub</a> ·
-       <a style="color:#22d3ee" href="https://www.linkedin.com/in/paramraval">LinkedIn</a> ·
-       <a style="color:#22d3ee" href="https://leetcode.com/Param_03">LeetCode</a> ·
-       <a style="color:#22d3ee" href="mailto:paramraval2005@gmail.com">paramraval2005@gmail.com</a></p>
-    <p>This page is an interactive game and needs JavaScript.</p>
-  </div>
-</noscript>
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side">
+    <div class="avatar-wrap">
+      <div class="avatar-ring"><img id="avatar" src="https://github.com/Param031010.png?size=400" alt="Param Raval" width="200" height="200"></div>
+    </div>
+    <h1 class="name">Param</h1>
+    <p class="handle">Param031010 <span>·</span> he/him</p>
+    <p class="bio">B.Tech student in Computer Science (AI &amp; ML). Generative AI and AI agents.</p>
+    <p class="typer" aria-live="off">Building <span id="typer"></span><i class="caret"></i></p>
+    <a class="btn-edit" href="https://github.com/Param031010" target="_blank" rel="noopener">View GitHub profile</a>
+    <p class="follow" id="follow"><span class="skel w60"></span></p>
+    <ul class="info">
+      <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z M6 11v5c3 2 9 2 12 0v-5"/></svg>CMR Institute of Technology</li>
+      <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Bengaluru</li>
+      <li><button type="button" class="copy" data-copy="paramraval2005@gmail.com" title="Click to copy"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3z M3 7l9 7 9-7"/></svg>paramraval2005@gmail.com</button></li>
+      <li><a href="https://www.linkedin.com/in/paramraval" target="_blank" rel="noopener"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1 M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/></svg>linkedin.com/in/paramraval</a></li>
+    </ul>
+    <h2 class="side-h">Highlights</h2>
+    <span class="pill-pro">PRO</span>
+  </aside>
 
-<script src="game.js"></script>
+  <!-- ============ MAIN ============ -->
+  <main class="main" id="main">
+
+    <!-- OVERVIEW -->
+    <section data-view="overview">
+      <article class="card readme reveal">
+        <div class="card-head">
+          <span class="mono"><b>Param031010</b> / README.md</span>
+          <a class="icon-btn" href="https://github.com/Param031010/Param031010" target="_blank" rel="noopener" aria-label="Open profile repository">
+            <svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z M14 6l4 4"/></svg>
+          </a>
+        </div>
+
+        <div class="hero">
+          <h2 class="hero-title">Param Raval, <span>AI/ML Engineer</span></h2>
+          <p class="hero-sub">B.Tech student in <b>Computer Science (AI &amp; ML)</b> at <b>CMR Institute of Technology, Bengaluru</b>, with a <b>9.28 CGPA</b>. I focus on <b>Generative AI and AI agents</b>, and I like to turn what I learn into practical, shipped projects.</p>
+          <dl class="stats">
+            <div><dt class="mono">PATENTS FILED</dt><dd data-count="2" data-pad="2">02</dd></div>
+            <div><dt class="mono">CGPA</dt><dd data-count="9.28" data-dec="2">9.28</dd></div>
+            <div><dt class="mono">FEATURED PROJECTS</dt><dd data-count="4" data-pad="2">04</dd></div>
+            <div><dt class="mono">CONTRIBUTIONS / YR</dt><dd id="stat-contrib" data-count="0" data-pad="2">··</dd></div>
+          </dl>
+        </div>
+
+        <h3 class="sec">About</h3>
+        <div class="about-grid">
+          <div class="about-card spot" tabindex="0">
+            <svg class="ic big" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h8l4 4v14H7z M15 3v4h4 M10 12h6M10 16h6"/></svg>
+            <h4>Two patents filed</h4>
+            <ol class="plist">
+              <li><span class="mono">01</span>AI-powered autonomous height detection system</li>
+              <li><span class="mono">02</span>Multilingual transliteration system</li>
+            </ol>
+          </div>
+          <div class="about-card spot" tabindex="0">
+            <svg class="ic big" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
+            <h4>Agent-based projects</h4>
+            <div class="chips"><button class="chip jump" data-project="medsys" type="button">MedSys AI</button><button class="chip jump" data-project="gitshow" type="button">GitShow</button><button class="chip jump" data-project="wayfarer" type="button">Wayfarer</button></div>
+          </div>
+          <div class="about-card spot" tabindex="0">
+            <svg class="ic big" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5z M3 13l9 5 9-5"/></svg>
+            <h4>End-to-end builds</h4>
+            <p>Data pipelines, APIs, dashboards and deployed apps.</p>
+          </div>
+        </div>
+
+        <div class="sec-row"><h3 class="sec">Featured projects</h3><div class="pills" id="proj-pills" role="tablist" aria-label="Filter projects"></div></div>
+        <div class="proj-grid" id="proj-grid"></div>
+
+        <h3 class="sec">Stack</h3>
+        <div class="stack">
+          <div class="orbit-wrap"><div class="orbit" id="orbit" aria-hidden="true"></div></div>
+          <div class="skill-cols" id="skills"></div>
+        </div>
+
+        <h3 class="sec">Connect</h3>
+        <div class="connect">
+          <a class="cchip" href="https://www.linkedin.com/in/paramraval" target="_blank" rel="noopener"><b class="mono">LinkedIn</b><span class="mono">paramraval</span></a>
+          <a class="cchip" href="https://leetcode.com/Param_03" target="_blank" rel="noopener"><b class="mono">LeetCode</b><span class="mono">Param_03</span></a>
+          <button class="cchip copy" data-copy="paramraval2005@gmail.com" type="button"><b class="mono">Email</b><span class="mono">paramraval2005@gmail.com</span></button>
+        </div>
+      </article>
+
+      <div class="head-row reveal"><h3>Popular repositories</h3><a class="link-mono" href="#/repositories">View all →</a></div>
+      <div class="repo-grid" id="pop-repos"></div>
+
+      <div class="head-row reveal"><h3 id="contrib-title">Contributions in the last year</h3></div>
+      <div class="card heat reveal" id="heat"><div class="skel block"></div></div>
+
+      <div class="head-row reveal"><h3>Contribution activity</h3></div>
+      <div class="timeline reveal" id="activity"><div class="skel block"></div></div>
+    </section>
+
+    <!-- REPOSITORIES -->
+    <section data-view="repositories" hidden>
+      <div class="head-row"><h3>Repositories</h3><span class="mono muted" id="repo-count"></span></div>
+      <div class="toolbar">
+        <label class="search"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14z M21 21l-5-5"/></svg><input id="repo-q" type="search" placeholder="Find a repository…" autocomplete="off"></label>
+        <select id="repo-lang" aria-label="Language"><option value="">All languages</option></select>
+        <select id="repo-sort" aria-label="Sort"><option value="pushed">Last updated</option><option value="name">Name</option><option value="created">Newest</option></select>
+        <label class="toggle"><input id="repo-forks" type="checkbox" checked><span>Show forks</span></label>
+      </div>
+      <div class="repo-list" id="repo-list"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section data-view="projects" hidden>
+      <div class="head-row"><h3>Projects</h3><span class="mono muted">Click a project for details</span></div>
+      <div class="proj-grid wide" id="proj-grid-2"></div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section data-view="packages" hidden>
+      <div class="head-row"><h3>Packages</h3></div>
+      <div class="empty card"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5v8l-9 5-9-5V8z M3 8l9 5 9-5 M12 13v8"/></svg><h4>No packages published yet</h4><p>Shipped work currently lives in repositories and deployed apps. Try the <a href="#/projects">Projects</a> tab.</p></div>
+    </section>
+
+    <!-- STARS -->
+    <section data-view="stars" hidden>
+      <div class="head-row"><h3>Starred repositories</h3></div>
+      <div class="repo-list" id="star-list"><div class="skel block"></div></div>
+    </section>
+
+    <footer class="foot mono">Live data from the GitHub API · <a href="game/">Switch to game mode</a> · <a href="https://github.com/Param031010/Param031010" target="_blank" rel="noopener">Source</a></footer>
+  </main>
+</div>
+
+<!-- project dialog -->
+<dialog id="proj-dialog" aria-labelledby="pd-title">
+  <div class="dlg-card">
+    <button class="dlg-x" id="pd-close" type="button" aria-label="Close">✕</button>
+    <div class="art big" id="pd-art"></div>
+    <div class="dlg-body">
+      <h3 id="pd-title"></h3>
+      <p id="pd-desc" class="dlg-desc"></p>
+      <div class="chips" id="pd-chips"></div>
+      <h5 class="mono">HIGHLIGHTS</h5>
+      <ul id="pd-points" class="points"></ul>
+      <div id="pd-live"></div>
+      <div class="dlg-actions" id="pd-actions"></div>
+    </div>
+  </div>
+</dialog>
+
+<!-- command palette -->
+<dialog id="palette" aria-label="Command palette">
+  <div class="pal-card">
+    <input id="pal-q" type="text" placeholder="Jump to a page, project, repository or link…" autocomplete="off" aria-label="Search commands">
+    <ul id="pal-list" role="listbox"></ul>
+    <p class="pal-foot mono"><kbd>↑</kbd><kbd>↓</kbd> navigate <kbd>Enter</kbd> open <kbd>Esc</kbd> close</p>
+  </div>
+</dialog>
+
+<div id="tip" class="tip" role="tooltip"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<noscript><p style="padding:24px;color:#e8edf3">Param Raval · AI/ML Engineer · B.Tech CSE (AI &amp; ML), CMRIT Bengaluru · <a style="color:#4fe3c1" href="https://github.com/Param031010">GitHub</a> · <a style="color:#4fe3c1" href="https://www.linkedin.com/in/paramraval">LinkedIn</a></p></noscript>
+<script src="app.js"></script>
 </body>
 </html>

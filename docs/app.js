@@ -52,8 +52,8 @@ const SKILLS = {
   Tooling: ['Docker', 'Git'],
 };
 const ORBIT = {
-  a: ['Docker', 'Git', 'JavaScript', 'React', 'Pandas', 'Java'],
-  b: ['Python', 'TypeScript', 'scikit-learn', 'Node.js'],
+  a: ['Python', 'TypeScript', 'JavaScript', 'Java'],
+  b: ['React', 'Node.js', 'scikit-learn', 'Pandas', 'Docker', 'Git'],
 };
 
 /* ------------------------------------------------------------------ *
@@ -124,7 +124,7 @@ addEventListener('resize', moveInk);
  * ------------------------------------------------------------------ */
 function typewriter() {
   const el = $('#typer');
-  const words = ['data pipelines', 'AI agents', 'GenAI apps', 'things that ship'];
+  const words = ['AI agents', 'data pipelines', 'things that ship'];
   if (reduce) { el.textContent = words[0]; return; }
   let w = 0, i = 0, del = false;
   (function tick() {
@@ -238,11 +238,11 @@ dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
  *  STACK
  * ------------------------------------------------------------------ */
 function renderStack() {
-  const place = (list, ring, radius) => list.map((n, i) => {
-    const a = (360 / list.length) * i + (ring === 'b' ? 45 : 0);
-    return `<span class="sk" data-skill="${esc(n)}" style="--a:${a}deg;--r:calc(${radius} * var(--u))">${dot(n)}${esc(n)}</span>`;
+  const ring = (list, off) => list.map((n, i) => {
+    const a = off + (360 / list.length) * i;
+    return `<div class="on-" style="--a:${a}deg"><div class="nin" style="--a:${a}deg"><span class="sk" data-skill="${esc(n)}">${dot(n)}${esc(n)}</span></div></div>`;
   }).join('');
-  $('#orbit').innerHTML = `<div class="ring a">${place(ORBIT.a, 'a', 124)}</div><div class="ring b">${place(ORBIT.b, 'b', 70)}</div>`;
+  $('#orbit').innerHTML = `<div class="orb o1">${ring(ORBIT.a, 20)}</div><div class="orb o2">${ring(ORBIT.b, 0)}</div><div class="core">stack</div>`;
   $('#skills').innerHTML = Object.entries(SKILLS).map(([g, list]) =>
     `<div class="skill-box"><h5>${esc(g.toUpperCase())}</h5><div class="chips">${list.map(n => `<span class="chip" data-skill="${esc(n)}">${dot(n)}${esc(n)}</span>`).join('')}</div></div>`).join('');
   const toggle = (name, on) => $$(`[data-skill="${CSS.escape(name)}"]`).forEach(el => el.classList.toggle('hl', on));
@@ -495,6 +495,7 @@ async function boot() {
 
 renderStack();
 typewriter();
+addEventListener('pointermove', e => { const g = $('#glow'); if (g) { g.style.setProperty('--gx', e.clientX + 'px'); g.style.setProperty('--gy', e.clientY + 'px'); } }, { passive: true });
 route();
 boot();
 // keep static counters animating on first paint (contributions animates once loaded)

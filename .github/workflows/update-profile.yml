@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Regenerate live SVGs (hero, contributions, activity) and cache-busters
+      - name: Regenerate live SVGs (hero, skyline, terminal) and cache-busters
         env:
           # Set a repo secret GH_PAT (read:user) if private contributions should be counted.
           GITHUB_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}

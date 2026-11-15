@@ -1,7 +1,8 @@
-// Regenerates the live profile SVGs (hero, contributions, activity) and refreshes ?v= cache-busters in README.md.
+// Regenerates the live profile SVGs (hero, skyline, terminal) and refreshes ?v= cache-busters in README.md.
 // Node 20+, no dependencies. Env: GITHUB_TOKEN (or GH_PAT for private contributions). Optional: PROFILE_USER, MOCK=1.
 import { writeFileSync } from 'node:fs';
-import { heroSvg, contribSvg, activitySvg, describeEvents, T, bumpReadmeVersions } from './svg-lib.mjs';
+import { T, bumpReadmeVersions } from './svg-lib.mjs';
+import { heroSvg, skylineSvg, terminalSvg, describeEvents } from './svg-live.mjs';
 
 const user = process.env.PROFILE_USER || 'Param031010';
 const token = process.env.GH_PAT || process.env.GITHUB_TOKEN;
@@ -41,7 +42,7 @@ async function viaPublic() {
 
 function mock() {
   const days = []; const now = Date.now();
-  for (let i = 370; i >= 0; i--) { const d = new Date(now - i * 864e5); const c = Math.random() < 0.55 ? 0 : Math.floor(Math.random() ** 2 * 14); days.push({ date: d.toISOString().slice(0, 10), count: c }); }
+  for (let i = 370; i >= 0; i--) { const d = new Date(now - i * 864e5); const c = process.env.MOCK === 'sparse' ? (Math.random() < 0.88 ? 0 : 1 + Math.floor(Math.random() ** 3 * 6)) : Math.random() < 0.55 ? 0 : Math.floor(Math.random() ** 2 * 14); days.push({ date: d.toISOString().slice(0, 10), count: c }); }
   const langs = [['TypeScript', 52e4], ['Python', 41e4], ['JavaScript', 12e4], ['HTML', 6e4], ['CSS', 3e4], ['Java', 2e4], ['Jupyter Notebook', 1e4]].map(([name, value]) => ({ name, value, color: T.lang[name] }));
   const t = (h) => new Date(now - h * 36e5).toISOString();
   const events = [
@@ -63,7 +64,7 @@ const events = nums.events ?? await getJson(`https://api.github.com/users/${user
 const { days, langs, events: _e, ...stats } = nums;
 console.log({ ...stats, days: days.length, langs: langs.length, events: events?.length });
 writeFileSync('assets/hero.svg', heroSvg({ ...stats, patents: 2, cgpa: '9.28' }));
-if (days.length) writeFileSync('assets/contributions.svg', contribSvg(days, stats.contributions));
-if (events) writeFileSync('assets/activity.svg', activitySvg(describeEvents(events, user), langs));
-else console.warn('events unavailable - keeping previous activity.svg');
+if (days.length) writeFileSync('assets/skyline.svg', skylineSvg(days, stats.contributions));
+if (events) writeFileSync('assets/terminal.svg', terminalSvg(describeEvents(events, user), langs));
+else console.warn('events unavailable - keeping previous terminal.svg');
 bumpReadmeVersions();

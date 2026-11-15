@@ -75,7 +75,7 @@ writeFileSync('assets/hero.svg', heroSvg({ ...stats, patents: 2, cgpa: '9.28' })
 if (days.length) writeFileSync('assets/skyline.svg', skylineSvg(days, stats.contributions));
 // Feed: real commits (skip the bot's own refresh commits) merged with non-push events such as new repos, PRs, stars.
 const feed = [
-  ...commits.filter((c) => !/refresh profile assets/.test(c.msg)).map((c) => ({ kind: 'push', id: c.sha.slice(0, 7), date: c.date, text: `${c.msg} · ${c.repo}` })),
+  ...commits.filter((c) => !/refresh profile assets/.test(c.msg)).map((c) => ({ kind: 'push', id: c.sha.slice(0, 7), date: c.date, text: `${c.repo} › ${c.msg}` })),
   ...(events ? describeEvents(events, user).filter((e) => e.kind !== 'push') : [])
 ].sort((a, b) => b.date.localeCompare(a.date));
 if (feed.length || events) writeFileSync('assets/terminal.svg', terminalSvg(feed, langs));

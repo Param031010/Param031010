@@ -1,7 +1,7 @@
 // Regenerates the live profile SVGs (hero, skyline, terminal) and refreshes ?v= cache-busters in README.md.
 // Node 20+, no dependencies. Env: GITHUB_TOKEN (or GH_PAT for private contributions). Optional: PROFILE_USER, MOCK=1.
 import { writeFileSync, readFileSync } from 'node:fs';
-import { T, bumpReadmeVersions } from './svg-lib.mjs';
+import { T, bumpReadmeVersions, shortSha } from './svg-lib.mjs';
 import { heroSvg, skylineSvg, terminalSvg, describeEvents } from './svg-live.mjs';
 
 const user = process.env.PROFILE_USER || 'Param031010';
@@ -14,7 +14,7 @@ async function viaGraphQL() {
     method: 'POST', headers: { ...H, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       query: `query($login:String!){user(login:$login){followers{totalCount} repositories(privacy:PUBLIC,ownerAffiliations:OWNER){totalCount}
-        own:repositories(first:100,privacy:PUBLIC,ownerAffiliations:OWNER,isFork:false){totalCount nodes{languages(first:10){edges{size node{name color}}}}}
+        own:repositories(first:100,privacy:PUBLIC,ownerAffiliations:OWNER,isFork:false,orderBy:{field:PUSHED_AT,direction:DESC}){totalCount nodes{name languages(first:10){edges{size node{name color}}} defaultBranchRef{target{... on Commit{history(first:4){nodes{oid messageHeadline committedDate author{user{login}}}}}}}}}
         contributionsCollection{contributionCalendar{totalContributions weeks{contributionDays{date contributionCount contributionLevel}}}}}}`,
       variables: { login: user }
     })
@@ -26,7 +26,10 @@ async function viaGraphQL() {
   const days = u.contributionsCollection.contributionCalendar.weeks.flatMap((w) => w.contributionDays).map((d) => ({ date: d.date, count: d.contributionCount, level: LV[d.contributionLevel] ?? 0 }));
   const langs = {};
   for (const n of u.own.nodes) for (const e of n.languages.edges) (langs[e.node.name] ??= { name: e.node.name, color: e.node.color, value: 0 }).value += e.size;
-  return { days, langs: Object.values(langs), contributions: u.contributionsCollection.contributionCalendar.totalContributions, followers: u.followers.totalCount, repos: u.repositories.totalCount, projects: u.own.totalCount };
+  const commits = u.own.nodes.flatMap((n) => (n.defaultBranchRef?.target?.history?.nodes || [])
+    .filter((c) => !c.author?.user || c.author.user.login.toLowerCase() === user.toLowerCase())
+    .map((c) => ({ repo: n.name, sha: c.oid, msg: c.messageHeadline, date: c.committedDate })));
+  return { days, commits, langs: Object.values(langs), contributions: u.contributionsCollection.contributionCalendar.totalContributions, followers: u.followers.totalCount, repos: u.repositories.totalCount, projects: u.own.totalCount };
 }
 
 // Token-less fallback so the script also runs locally: public REST + community contributions API.
@@ -37,7 +40,11 @@ async function viaPublic() {
   const list = (await getJson(`https://api.github.com/users/${user}/repos?per_page=100&type=owner`)).filter((r) => !r.fork);
   const langs = {};
   for (const r of list) if (r.language) (langs[r.language] ??= { name: r.language, color: T.lang[r.language], value: 0 }).value += Math.max(r.size, 1);
-  return { days: c.contributions, langs: Object.values(langs), contributions: total, followers: u.followers, repos: u.public_repos, projects: list.length };
+  const recent = [...list].sort((a, b) => b.pushed_at.localeCompare(a.pushed_at)).slice(0, 5);
+  const commits = (await Promise.all(recent.map((r) => getJson(`https://api.github.com/repos/${user}/${r.name}/commits?per_page=4`)
+    .then((cs) => cs.filter((c) => !c.author || c.author.login.toLowerCase() === user.toLowerCase())
+      .map((c) => ({ repo: r.name, sha: c.sha, msg: c.commit.message.split('\n')[0], date: c.commit.committer.date }))).catch(() => [])))).flat();
+  return { days: c.contributions, commits, langs: Object.values(langs), contributions: total, followers: u.followers, repos: u.public_repos, projects: list.length };
 }
 
 function mock() {
@@ -54,21 +61,27 @@ function mock() {
     { type: 'WatchEvent', repo: { name: 'langchain-ai/langgraph' }, payload: {}, created_at: t(100) },
     { type: 'PushEvent', repo: { name: `${user}/${user}` }, payload: { size: 1 }, created_at: t(130) }
   ];
-  return { days, langs, events, contributions: days.reduce((a, d) => a + d.count, 0), followers: 1, repos: 24, projects: 21 };
+  const commits = [['MedSys_FINAL', 'add triage agent with tool calling', 3], ['MedSys_FINAL', 'fix RAG chunk overlap', 20], ['i', 'initial commit', 90], ['MLOPS', 'dvc pipeline for training', 500]].map(([repo, msg, h]) => ({ repo, msg, sha: shortSha(msg) + '000', date: t(h) }));
+  return { days, commits, langs, events, contributions: days.reduce((a, d) => a + d.count, 0), followers: 1, repos: 24, projects: 21 };
 }
 
 const nums = process.env.MOCK ? mock()
   : token ? await viaGraphQL().catch((e) => { console.warn(e.message, '- falling back to public APIs'); return viaPublic(); }) : await viaPublic();
 const events = nums.events ?? await getJson(`https://api.github.com/users/${user}/events/public?per_page=60`).catch((e) => { console.warn(e.message); return null; });
 
-const { days, langs, events: _e, ...stats } = nums;
+const { days, langs, commits = [], events: _e, ...stats } = nums;
 console.log({ ...stats, days: days.length, langs: langs.length, events: events?.length });
 writeFileSync('assets/hero.svg', heroSvg({ ...stats, patents: 2, cgpa: '9.28' }));
 if (days.length) writeFileSync('assets/skyline.svg', skylineSvg(days, stats.contributions));
-if (events) writeFileSync('assets/terminal.svg', terminalSvg(describeEvents(events, user), langs));
+// Feed: real commits (skip the bot's own refresh commits) merged with non-push events such as new repos, PRs, stars.
+const feed = [
+  ...commits.filter((c) => !/refresh profile assets/.test(c.msg)).map((c) => ({ kind: 'push', id: c.sha.slice(0, 7), date: c.date, text: `${c.msg} · ${c.repo}` })),
+  ...(events ? describeEvents(events, user).filter((e) => e.kind !== 'push') : [])
+].sort((a, b) => b.date.localeCompare(a.date));
+if (feed.length || events) writeFileSync('assets/terminal.svg', terminalSvg(feed, langs));
 else console.warn('events unavailable - keeping previous terminal.svg');
 // Show the live section only once both cards were built from real data.
-if (!process.env.MOCK && days.length && events) {
+if (!process.env.MOCK && days.length && (feed.length || events)) {
   const live = `## Live on GitHub
 
 <p align="center">

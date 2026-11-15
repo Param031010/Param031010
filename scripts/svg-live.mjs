@@ -225,12 +225,12 @@ export function terminalSvg(items, langs, now = new Date()) {
   const W = 838, H = 330, TB = 38, SB = 26, SPLIT = 540;
   const rows = items.slice(0, 7);
   const KC = { push: T.ac, new: T.vi, pr: T.ac, issue: T.vi, star: '#e3c565' };
-  const cmd1 = 'git log --live --author=Param031010';
+  const cmd1 = 'git log --all-repos --author=Param031010';
   const cmdW = f1(cmd1.length * 7.2);
   const log = rows.length ? rows.map((it, i) => {
     const y = TB + 66 + i * 24;
     return `<g class="ln" style="animation-delay:${(1.5 + i * 0.28).toFixed(2)}s">
-<text class="m" x="24" y="${y}" font-size="12"><tspan fill="${KC[it.kind] || T.mu}">●</tspan><tspan dx="8" fill="${T.vi}">${esc(it.id)}</tspan><tspan dx="10" fill="${T.mu}">${esc(fmtDay(it.date).toUpperCase().padEnd(6, ' '))}</tspan><tspan dx="10" fill="${T.tx}">${esc(clip(it.text, 44))}</tspan></text></g>`;
+<text class="m" x="24" y="${y}" font-size="12"><tspan fill="${KC[it.kind] || T.mu}">●</tspan><tspan dx="8" fill="${T.vi}">${esc(it.id)}</tspan><tspan dx="10" fill="${T.mu}">${esc(fmtDay(it.date).toUpperCase().padEnd(6, ' '))}</tspan><tspan dx="10" fill="${T.tx}">${esc(clip(it.text, 45))}</tspan></text></g>`;
   }).join('') : `<text class="m ln" x="24" y="${TB + 66}" font-size="12" fill="${T.mu}">no public activity in the last 90 days</text>`;
   const top = langs.filter((l) => l.value > 0).sort((a, b) => b.value - a.value);
   const head = top.slice(0, 5), rest = top.slice(5).reduce((a, l) => a + l.value, 0);

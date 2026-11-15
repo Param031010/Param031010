@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Param031010"><img src="assets/hero.svg?v=02479c7" width="100%" alt="Animated hero: Param Raval, AI/ML Engineer. Stats: 2 patents filed, 9.28 CGPA, number of projects on GitHub, and contributions in the last year."></a>
+  <a href="https://github.com/Param031010"><img src="assets/hero.svg?v=f53a8ed" width="100%" alt="Animated hero: Param Raval, AI/ML Engineer. Stats: 2 patents filed, 9.28 CGPA, number of projects on GitHub, and contributions in the last year."></a>
 </p>
 
 B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technology, Bengaluru**, with a **9.28 CGPA**. I focus on **Generative AI and AI agents**, and I like to turn what I learn into practical, shipped projects.
@@ -8,14 +8,8 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
   <img src="assets/about.svg?v=5ed4de8" width="100%" alt="Two patents filed (AI-powered autonomous height detection system; multilingual transliteration system). Agent-based projects: MedSys AI, GitShow, Wayfarer. Generative AI focus: RAG, LoRA fine-tuning and LLM-powered agents.">
 </p>
 
-## Live on GitHub
-
-<p align="center">
-  <a href="https://github.com/Param031010?tab=overview"><img src="assets/skyline.svg?v=9f37da6" width="100%" alt="3D contribution skyline: one building per day over the last year, taller means more contributions, with current and longest streaks. Refreshed every 6 hours."></a>
-</p>
-<p align="center">
-  <a href="https://github.com/Param031010?tab=repositories"><img src="assets/terminal.svg?v=1b0b9c8" width="100%" alt="Terminal-style live feed of my recent public GitHub activity, next to a language breakdown across my repositories. Refreshed every 6 hours."></a>
-</p>
+<!-- LIVE:START -->
+<!-- LIVE:END -->
 
 ## Featured projects
 

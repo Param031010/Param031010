@@ -1,6 +1,6 @@
 // Regenerates the live profile SVGs (hero, skyline, terminal) and refreshes ?v= cache-busters in README.md.
 // Node 20+, no dependencies. Env: GITHUB_TOKEN (or GH_PAT for private contributions). Optional: PROFILE_USER, MOCK=1.
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, readFileSync } from 'node:fs';
 import { T, bumpReadmeVersions } from './svg-lib.mjs';
 import { heroSvg, skylineSvg, terminalSvg, describeEvents } from './svg-live.mjs';
 
@@ -67,4 +67,18 @@ writeFileSync('assets/hero.svg', heroSvg({ ...stats, patents: 2, cgpa: '9.28' })
 if (days.length) writeFileSync('assets/skyline.svg', skylineSvg(days, stats.contributions));
 if (events) writeFileSync('assets/terminal.svg', terminalSvg(describeEvents(events, user), langs));
 else console.warn('events unavailable - keeping previous terminal.svg');
+// Show the live section only once both cards were built from real data.
+if (!process.env.MOCK && days.length && events) {
+  const live = `## Live on GitHub
+
+<p align="center">
+  <a href="https://github.com/${user}?tab=overview"><img src="assets/skyline.svg" width="100%" alt="3D contribution skyline: one building per day over the last year, taller means more contributions, with current and longest streaks. Refreshed every 6 hours."></a>
+</p>
+<p align="center">
+  <a href="https://github.com/${user}?tab=repositories"><img src="assets/terminal.svg" width="100%" alt="Terminal-style live feed of my recent public GitHub activity, next to a language breakdown across my repositories. Refreshed every 6 hours."></a>
+</p>
+`;
+  const md = readFileSync('README.md', 'utf8').replace(/<!-- LIVE:START -->[\s\S]*?<!-- LIVE:END -->/, `<!-- LIVE:START -->\n${live}<!-- LIVE:END -->`);
+  writeFileSync('README.md', md);
+}
 bumpReadmeVersions();

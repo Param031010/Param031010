@@ -121,3 +121,143 @@ export function bumpReadmeVersions(readmePath = 'README.md', assetsDir = 'assets
   });
   writeFileSync(readmePath, md);
 }
+
+/* ---------- live sections ---------- */
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const fmtDay = (iso) => { const d = new Date(iso); return `${MON[d.getUTCMonth()]} ${d.getUTCDate()}`; };
+const clip = (s, n) => (s.length > n ? s.slice(0, n - 1) + '…' : s);
+
+/** Current / longest streak and best day from [{date,count}] (oldest first). */
+export function streaks(days) {
+  let longest = 0, run = 0, best = { count: 0, date: null };
+  for (const d of days) {
+    run = d.count > 0 ? run + 1 : 0; longest = Math.max(longest, run);
+    if (d.count > best.count) best = d;
+  }
+  let i = days.length - 1, current = 0;
+  if (i >= 0 && days[i].count === 0) i--; // today not counted yet doesn't break the streak
+  for (; i >= 0 && days[i].count > 0; i--) current++;
+  return { current, longest, best };
+}
+
+/** Contribution heatmap: last ~53 weeks, streak tiles, sweeping scan line. */
+export function contribSvg(days, total, now = new Date()) {
+  const W = 838, H = 300, P = 14, C = 11, X0 = 62, Y0 = 84;
+  const last = days.slice(-371);
+  const pad = new Date(last[0].date + 'T00:00:00Z').getUTCDay();
+  const cells = [...Array(pad).fill(null), ...last];
+  const weeks = Math.ceil(cells.length / 7);
+  const op = [0, .28, .5, .75, 1];
+  let rects = '', months = '', prevM = -1;
+  cells.forEach((d, k) => {
+    const wx = Math.floor(k / 7), dy = k % 7;
+    if (!d) return;
+    const x = X0 + wx * P, y = Y0 + dy * P;
+    const m = new Date(d.date + 'T00:00:00Z').getUTCMonth();
+    if (dy === 0 || k === pad) { if (m !== prevM && wx < weeks - 2) { months += `<text class="m" x="${x}" y="${Y0 - 10}" font-size="10" fill="${T.mu}">${MON[m]}</text>`; } prevM = m; }
+    const lv = d.level ?? (d.count === 0 ? 0 : d.count < 3 ? 1 : d.count < 6 ? 2 : d.count < 10 ? 3 : 4);
+    const isLast = k === cells.length - 1;
+    rects += lv === 0
+      ? `<rect x="${x}" y="${y}" width="${C}" height="${C}" rx="3" fill="${T.s2}"/>`
+      : `<rect${isLast ? ' class="pn pl"' : ''} x="${x}" y="${y}" width="${C}" height="${C}" rx="3" fill="${T.ac}" fill-opacity="${op[lv]}"><title>${d.count} on ${d.date}</title></rect>`;
+  });
+  const dl = [[1, 'Mon'], [3, 'Wed'], [5, 'Fri']].map(([r, l]) => `<text class="m" x="32" y="${Y0 + r * P + 9}" font-size="10" fill="${T.mu}">${l}</text>`).join('');
+  const s = streaks(last);
+  const tiles = [
+    [String(total), 'Contributions'], [`${s.current}d`, 'Current streak'],
+    [`${s.longest}d`, 'Longest streak'], [s.best.date ? String(s.best.count) : '0', s.best.date ? `Best day · ${fmtDay(s.best.date)}` : 'Best day']
+  ];
+  const tw = (W - 64 - 3 * 14) / 4;
+  const tileSvg = tiles.map(([v, l], i) => `<g transform="translate(${32 + i * (tw + 14)} 204)"><rect width="${tw}" height="72" rx="14" fill="${T.s1}" stroke="#fff" stroke-opacity=".09"/>
+<text class="d" x="18" y="38" font-size="26" font-weight="800" fill="${T.tx}">${esc(v)}</text>
+<text class="m" x="18" y="58" font-size="9.5" letter-spacing="1.2" fill="${T.mu}">${esc(l.toUpperCase())}</text></g>`).join('');
+  const legend = op.map((o, i) => `<rect x="${W - 32 - (5 - i) * 15}" y="34" width="${C}" height="${C}" rx="3" fill="${i ? T.ac : T.s2}" ${i ? `fill-opacity="${o}"` : ''}/>`).join('');
+  const gw = weeks * P;
+  return svg({
+    w: W, h: H, fonts: ['display-700', 'display-800', 'mono-500'],
+    css: motion(`.pl{animation:pl 2.4s ease-in-out infinite}@keyframes pl{50%{transform:scale(1.35)}}
+.sc{animation:sc 7s cubic-bezier(.6,0,.4,1) infinite}@keyframes sc{0%{transform:translateX(0);opacity:0}8%{opacity:1}85%{opacity:1}100%{transform:translateX(${gw}px);opacity:0}}`),
+    defs: `<linearGradient id="sg" x1="0" x2="1"><stop offset="0" stop-color="${T.ac}" stop-opacity="0"/><stop offset="1" stop-color="${T.ac}" stop-opacity=".22"/></linearGradient><clipPath id="gc"><rect x="${X0}" y="${Y0}" width="${gw}" height="${7 * P}"/></clipPath>`,
+    title: 'Contribution activity',
+    desc: `${total} contributions in the last year. Current streak ${s.current} days, longest streak ${s.longest} days${s.best.date ? `, best day ${s.best.count} on ${s.best.date}` : ''}.`,
+    body: `<text class="d" x="32" y="46" font-size="20" font-weight="700" fill="${T.tx}">Contribution activity</text>
+<text class="m" x="${W - 32 - 5 * 15 - 10}" y="44" font-size="10" text-anchor="end" fill="${T.mu}">LESS</text>${legend}
+${months}${dl}${rects}
+<g clip-path="url(#gc)"><rect class="sc" x="${X0 - 40}" y="${Y0}" width="40" height="${7 * P}" fill="url(#sg)" opacity="0"/></g>
+${tileSvg}
+<text class="m" x="${W - 32}" y="${H - 8}" font-size="9" letter-spacing="1" text-anchor="end" fill="${T.mu}" opacity=".7">UPDATED ${esc(fmtDay(now.toISOString()).toUpperCase())} · ${String(now.getUTCHours()).padStart(2, '0')}:00 UTC</text>`
+  });
+}
+
+/** Turn GitHub public events into short lines: [{kind, text, date}]. */
+export function describeEvents(events, user) {
+  const short = (n) => (n.toLowerCase().startsWith(user.toLowerCase() + '/') ? n.slice(user.length + 1) : n);
+  const out = [];
+  for (const e of events) {
+    const r = short(e.repo?.name || ''), p = e.payload || {}, date = e.created_at;
+    let kind, text;
+    switch (e.type) {
+      case 'PushEvent': {
+        const n = p.size ?? p.commits?.length ?? 0;
+        const prev = out[out.length - 1];
+        if (prev && prev.kind === 'push' && prev.repo === r && fmtDay(prev.date) === fmtDay(date)) { prev.n += n; prev.text = pushText(prev.n, r); continue; }
+        out.push({ kind: 'push', repo: r, n, date, text: pushText(n, r) }); continue;
+      }
+      case 'CreateEvent': kind = 'new'; text = p.ref_type === 'repository' ? `Created repository ${r}` : `Created ${p.ref_type} ${p.ref} in ${r}`; break;
+      case 'PullRequestEvent': kind = 'pr'; text = `${p.pull_request?.merged ? 'Merged' : cap(p.action)} PR #${p.number} in ${r}`; break;
+      case 'IssuesEvent': kind = 'issue'; text = `${cap(p.action)} issue #${p.issue?.number} in ${r}`; break;
+      case 'ReleaseEvent': kind = 'new'; text = `Released ${p.release?.tag_name || ''} of ${r}`; break;
+      case 'PublicEvent': kind = 'new'; text = `Open-sourced ${r}`; break;
+      case 'ForkEvent': kind = 'star'; text = `Forked ${r}`; break;
+      case 'WatchEvent': kind = 'star'; text = `Starred ${r}`; break;
+      default: continue;
+    }
+    out.push({ kind, text, date });
+  }
+  return out;
+}
+const cap = (s = '') => s.charAt(0).toUpperCase() + s.slice(1);
+const pushText = (n, r) => (n > 0 ? `Pushed ${n} commit${n === 1 ? '' : 's'} to ${r}` : `Pushed to ${r}`);
+
+/** Recent activity feed + language breakdown. langs: [{name, color, value}] */
+export function activitySvg(items, langs, now = new Date()) {
+  const W = 838, H = 300, LW = 486, RX = 32 + LW + 24, RW = W - RX - 32;
+  const KC = { push: T.ac, new: T.vi, pr: T.ac, issue: T.vi, star: T.mu };
+  const rows = items.slice(0, 6);
+  const list = rows.length ? rows.map((it, i) => {
+    const y = 92 + i * 32;
+    return `<g class="rw" style="animation-delay:${(i * 0.12).toFixed(2)}s">
+<circle cx="${32 + 30}" cy="${y - 4}" r="5" fill="${KC[it.kind] || T.mu}"${i === 0 ? ' class="pn pl"' : ''}/>
+${i < rows.length - 1 ? `<line x1="62" y1="${y + 4}" x2="62" y2="${y + 20}" stroke="#fff" stroke-opacity=".12" stroke-width="1.5"/>` : ''}
+<text class="b" x="82" y="${y}" font-size="13.5" fill="${T.tx}">${esc(clip(it.text, 46))}</text>
+<text class="m" x="${32 + LW - 20}" y="${y}" font-size="10" letter-spacing="1" text-anchor="end" fill="${T.mu}">${esc(fmtDay(it.date).toUpperCase())}</text></g>`;
+  }).join('') : `<text class="b" x="52" y="96" font-size="13.5" fill="${T.mu}">No public activity in the last 90 days.</text>`;
+  const top = langs.filter((l) => l.value > 0).sort((a, b) => b.value - a.value);
+  const head = top.slice(0, 5), rest = top.slice(5).reduce((a, l) => a + l.value, 0);
+  if (rest > 0) head.push({ name: 'Other', color: '#5b6474', value: rest });
+  const sum = head.reduce((a, l) => a + l.value, 0) || 1;
+  let bx = 0;
+  const bar = head.map((l) => { const w = (l.value / sum) * (RW - 40); const r = `<rect x="${bx.toFixed(1)}" y="0" width="${Math.max(w - 2, 1).toFixed(1)}" height="10" rx="3" fill="${l.color || T.mu}"/>`; bx += w; return r; }).join('');
+  const legend = head.map((l, i) => {
+    const y = 116 + i * 22, pct = (l.value / sum) * 100;
+    return `<circle cx="${RX + 26}" cy="${y - 4}" r="4.5" fill="${l.color || T.mu}"/><text class="b" x="${RX + 40}" y="${y}" font-size="13" fill="${T.tx}">${esc(l.name)}</text>
+<text class="m" x="${RX + RW - 20}" y="${y}" font-size="11" text-anchor="end" fill="${T.mu}">${pct < 1 ? '<1' : pct.toFixed(pct < 10 ? 1 : 0)}%</text>`;
+  }).join('');
+  const panel = (x, w) => `<rect x="${x}" y="20" width="${w}" height="${H - 40}" rx="18" fill="${T.s1}" stroke="#fff" stroke-opacity=".09"/>`;
+  return svg({
+    w: W, h: H, fonts: ['display-700', 'body-400', 'mono-500'],
+    css: `.bw{transform-box:fill-box;transform-origin:left center}` + motion(`.pl{animation:pl 2.4s ease-in-out infinite}@keyframes pl{50%{transform:scale(1.4)}}
+.rw{animation:rw .6s ease-out both}@keyframes rw{from{opacity:0;transform:translateX(-6px)}}
+.bw{animation:bw 1.2s cubic-bezier(.2,.8,.2,1) both}@keyframes bw{from{transform:scaleX(0)}}`),
+    title: 'Recent activity and languages',
+    desc: `Recent public activity: ${rows.map((r) => r.text + ' (' + fmtDay(r.date) + ')').join('; ') || 'none'}. Languages: ${head.map((l) => l.name + ' ' + Math.round((l.value / sum) * 100) + '%').join(', ')}.`,
+    body: `${panel(20, LW + 12)}${panel(RX - 12, RW + 24)}
+<text class="d" x="52" y="58" font-size="18" font-weight="700" fill="${T.tx}">Recent activity</text>
+<text class="m" x="${32 + LW - 20}" y="57" font-size="9.5" letter-spacing="1.2" text-anchor="end" fill="${T.ac}">● LIVE</text>
+${list}
+<text class="d" x="${RX + 20}" y="58" font-size="18" font-weight="700" fill="${T.tx}">Languages</text>
+<g transform="translate(${RX + 20} 78)"><g class="bw">${bar}</g></g>
+${legend}
+<text class="m" x="${RX + 20}" y="${H - 34}" font-size="9" letter-spacing="1" fill="${T.mu}" opacity=".8">ACROSS OWN PUBLIC REPOS</text>`
+  });
+}

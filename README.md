@@ -8,6 +8,15 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
   <img src="assets/about.svg?v=5ed4de8" width="100%" alt="Two patents filed (AI-powered autonomous height detection system; multilingual transliteration system). Agent-based projects: MedSys AI, GitShow, Wayfarer. Generative AI focus: RAG, LoRA fine-tuning and LLM-powered agents.">
 </p>
 
+## Live on GitHub
+
+<p align="center">
+  <a href="https://github.com/Param031010?tab=overview"><img src="assets/contributions.svg?v=ddc5ae0" width="100%" alt="Contribution activity over the last year with current and longest streaks. Refreshed automatically every 6 hours."></a>
+</p>
+<p align="center">
+  <a href="https://github.com/Param031010?tab=repositories"><img src="assets/activity.svg?v=d9f2c33" width="100%" alt="Recent public GitHub activity and language breakdown across my repositories. Refreshed automatically every 6 hours."></a>
+</p>
+
 ## Featured projects
 
 <table>

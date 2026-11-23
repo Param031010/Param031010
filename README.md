@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Param031010"><img src="assets/hero.svg?v=b24740b" width="100%" alt="Animated hero: Param Raval, AI/ML Engineer. Stats: 2 patents filed, 9.28 CGPA, number of projects on GitHub, and contributions in the last year."></a>
+  <a href="https://github.com/Param031010"><img src="assets/hero.svg?v=38c14a1" width="100%" alt="Animated hero: Param Raval, AI/ML Engineer. Stats: 2 patents filed, 9.28 CGPA, number of projects on GitHub, and contributions in the last year."></a>
 </p>
 
 B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technology, Bengaluru**, with a **9.28 CGPA**. I focus on **Generative AI and AI agents**, and I like to turn what I learn into practical, shipped projects.
@@ -12,10 +12,10 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
 ## Live on GitHub
 
 <p align="center">
-  <a href="https://github.com/Param031010?tab=overview"><img src="assets/skyline.svg?v=3ad8aa0" width="100%" alt="3D contribution skyline: one building per day over the last year, taller means more contributions, with current and longest streaks. Refreshed every 6 hours."></a>
+  <a href="https://github.com/Param031010?tab=overview"><img src="assets/skyline.svg?v=997d5e2" width="100%" alt="3D contribution skyline: one building per day over the last year, taller means more contributions, with current and longest streaks. Refreshed every 6 hours."></a>
 </p>
 <p align="center">
-  <a href="https://github.com/Param031010?tab=repositories"><img src="assets/terminal.svg?v=cc89703" width="100%" alt="Terminal-style live feed of my recent public GitHub activity, next to a language breakdown across my repositories. Refreshed every 6 hours."></a>
+  <a href="https://github.com/Param031010?tab=repositories"><img src="assets/terminal.svg?v=ad1d80b" width="100%" alt="Terminal-style live feed of my recent public GitHub activity, next to a language breakdown across my repositories. Refreshed every 6 hours."></a>
 </p>
 <!-- LIVE:END -->
 

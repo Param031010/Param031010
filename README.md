@@ -12,10 +12,10 @@ B.Tech student in **Computer Science (AI & ML)** at **CMR Institute of Technolog
 ## Live on GitHub
 
 <p align="center">
-  <a href="https://github.com/Param031010?tab=overview"><img src="assets/skyline.svg?v=6d5e9fb" width="100%" alt="3D contribution skyline: one building per day over the last year, taller means more contributions, with current and longest streaks. Refreshed every 6 hours."></a>
+  <a href="https://github.com/Param031010?tab=overview"><img src="assets/skyline.svg?v=8ff16d8" width="100%" alt="3D contribution skyline: one building per day over the last year, taller means more contributions, with current and longest streaks. Refreshed every 6 hours."></a>
 </p>
 <p align="center">
-  <a href="https://github.com/Param031010?tab=repositories"><img src="assets/terminal.svg?v=0e8d348" width="100%" alt="Terminal-style live feed of my recent public GitHub activity, next to a language breakdown across my repositories. Refreshed every 6 hours."></a>
+  <a href="https://github.com/Param031010?tab=repositories"><img src="assets/terminal.svg?v=0122249" width="100%" alt="Terminal-style live feed of my recent public GitHub activity, next to a language breakdown across my repositories. Refreshed every 6 hours."></a>
 </p>
 <!-- LIVE:END -->
 
